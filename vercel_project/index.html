@@ -5,6 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Email Performance — Bikebac Case Study</title>
 <style>
+  @font-face {
+    font-family: "ITC Avant Garde";
+    src: url("fonts/ITCAvantGardeStd-Bk.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "ITC Avant Garde";
+    src: url("fonts/ITCAvantGardeStd-Md.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "ITC Avant Garde";
+    src: url("fonts/ITCAvantGardeStd-Demi.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "ITC Avant Garde";
+    src: url("fonts/ITCAvantGardeStd-DemiObl.woff2") format("woff2");
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "ITC Avant Garde";
+    src: url("fonts/ITCAvantGardeStd-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
     --background: #0a0a0a;
     --surface: #111111;
@@ -19,15 +55,32 @@
   body {
     background: var(--background);
     color: var(--foreground);
-    font-family: -apple-system, "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "ITC Avant Garde", -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
     line-height: 1.6;
   }
 
   .display {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "ITC Avant Garde", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
     letter-spacing: -0.03em;
     text-transform: uppercase;
+  }
+
+  .title-demi {
+    font-family: "ITC Avant Garde", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+  }
+
+  .hero-eyebrow,
+  .hero-stat-label,
+  .method-label,
+  .closing-label,
+  .exhibit-tag,
+  .exhibit-stat-label,
+  .exhibit-number {
+    font-family: "ITC Avant Garde", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
   }
 
   .mono {
@@ -205,60 +258,40 @@
     font-style: italic;
   }
 
-  .exhibit-bars {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-
-  .bar-row {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .bar-row-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-size: 13px;
-  }
-
-  .bar-row-label { color: var(--muted); }
-
-  .bar-row-value {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--foreground);
-  }
-
-  .bar-row-value .lift {
-    color: var(--accent);
-    font-size: 12px;
-    font-weight: 600;
-    margin-left: 6px;
-  }
-
-  .bar-track {
-    height: 6px;
+  .exhibit-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
     background: var(--border);
-    border-radius: 3px;
-    overflow: hidden;
-    position: relative;
+    border: 1px solid var(--border);
   }
 
-  .bar-fill {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 3px;
+  .exhibit-stat {
+    background: var(--background);
+    padding: 22px 18px;
   }
 
-  .bar-baseline-marker {
-    position: absolute;
-    top: -3px;
-    height: 12px;
-    width: 2px;
-    background: var(--muted);
+  .exhibit-stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .exhibit-stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--foreground);
+    margin-bottom: 8px;
+  }
+
+  .exhibit-stat-sub {
+    font-size: 12px;
+    color: var(--accent);
+    line-height: 1.4;
   }
 
   /* ===== CLOSING ===== */
@@ -312,6 +345,7 @@
     .exhibit.reverse .exhibit-content { order: 2; }
     .exhibit-image-wrap { position: static; }
     .exhibit h2 { font-size: 26px; }
+    .exhibit-stats { grid-template-columns: 1fr; }
     .closing { padding: 64px 20px 100px; }
     .closing h2 { font-size: 28px; }
   }
@@ -365,27 +399,21 @@
       <h2 class="display">The top earner wasn't a campaign at all</h2>
       <p class="exhibit-subject">"Reminder of Incentive" — Welcome Series, rebuilt May 2025</p>
 
-      <div class="exhibit-bars">
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-row-label">Revenue (single message, trailing 12mo)</span>
-            <span class="bar-row-value">$8,917<span class="lift">highest of any flow email</span></span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+      <div class="exhibit-stats">
+        <div class="exhibit-stat">
+          <div class="exhibit-stat-label">Revenue, single message</div>
+          <div class="exhibit-stat-num">$8,917</div>
+          <div class="exhibit-stat-sub">highest of any flow email</div>
         </div>
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-row-label">Conversion rate</span>
-            <span class="bar-row-value">1.88%<span class="lift">6x account average</span></span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" style="width:63%"></div><div class="bar-baseline-marker" style="left:10%"></div></div>
+        <div class="exhibit-stat">
+          <div class="exhibit-stat-label">Conversion rate</div>
+          <div class="exhibit-stat-num">1.88%</div>
+          <div class="exhibit-stat-sub">6x account average</div>
         </div>
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-row-label">Open rate</span>
-            <span class="bar-row-value">52.8%<span class="lift">+7pts vs. account avg</span></span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" style="width:53%"></div><div class="bar-baseline-marker" style="left:46%"></div></div>
+        <div class="exhibit-stat">
+          <div class="exhibit-stat-label">Open rate</div>
+          <div class="exhibit-stat-num">52.8%</div>
+          <div class="exhibit-stat-sub">+7pts vs. account avg</div>
         </div>
       </div>
 
@@ -405,27 +433,21 @@
       <h2 class="display">One stat, no design, still the best long-form send</h2>
       <p class="exhibit-subject">"11x Bike Return Rate" — A/B test winner, sent to full D2C list</p>
 
-      <div class="exhibit-bars">
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-row-label">Revenue, full-list send (17,180 recipients)</span>
-            <span class="bar-row-value">$1,241<span class="lift">best of all long-form text sends</span></span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" style="width:24%"></div></div>
+      <div class="exhibit-stats">
+        <div class="exhibit-stat">
+          <div class="exhibit-stat-label">Revenue, full-list send</div>
+          <div class="exhibit-stat-num">$1,241</div>
+          <div class="exhibit-stat-sub">17,180 recipients, best of all long-form text sends</div>
         </div>
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-row-label">Open rate</span>
-            <span class="bar-row-value">49.7%<span class="lift">+4pts vs. account avg</span></span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" style="width:50%"></div><div class="bar-baseline-marker" style="left:46%"></div></div>
+        <div class="exhibit-stat">
+          <div class="exhibit-stat-label">Open rate</div>
+          <div class="exhibit-stat-num">49.7%</div>
+          <div class="exhibit-stat-sub">+4pts vs. account avg</div>
         </div>
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-row-label">Unique click rate</span>
-            <span class="bar-row-value">1.34%<span class="lift">4x account average</span></span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" style="width:67%"></div><div class="bar-baseline-marker" style="left:15%"></div></div>
+        <div class="exhibit-stat">
+          <div class="exhibit-stat-label">Unique click rate</div>
+          <div class="exhibit-stat-num">1.34%</div>
+          <div class="exhibit-stat-sub">4x account average</div>
         </div>
       </div>
 
@@ -445,27 +467,21 @@
       <h2 class="display">The single highest-revenue send of the year</h2>
       <p class="exhibit-subject">"Labor Day Flash Sale — Last Call" — final reminder, code expiring at midnight</p>
 
-      <div class="exhibit-bars">
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-row-label">Revenue (single campaign send)</span>
-            <span class="bar-row-value">$2,031<span class="lift">highest of any individual campaign</span></span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" style="width:38%"></div></div>
+      <div class="exhibit-stats">
+        <div class="exhibit-stat">
+          <div class="exhibit-stat-label">Revenue, single send</div>
+          <div class="exhibit-stat-num">$2,031</div>
+          <div class="exhibit-stat-sub">highest of any individual campaign</div>
         </div>
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-row-label">Open rate</span>
-            <span class="bar-row-value">48.2%<span class="lift">+2pts vs. account avg</span></span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" style="width:48%"></div><div class="bar-baseline-marker" style="left:46%"></div></div>
+        <div class="exhibit-stat">
+          <div class="exhibit-stat-label">Open rate</div>
+          <div class="exhibit-stat-num">48.2%</div>
+          <div class="exhibit-stat-sub">+2pts vs. account avg</div>
         </div>
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-row-label">Conversion rate</span>
-            <span class="bar-row-value">0.14%<span class="lift">on 16,925 recipients</span></span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" style="width:46%"></div><div class="bar-baseline-marker" style="left:10%"></div></div>
+        <div class="exhibit-stat">
+          <div class="exhibit-stat-label">Conversion rate</div>
+          <div class="exhibit-stat-num">0.14%</div>
+          <div class="exhibit-stat-sub">on 16,925 recipients</div>
         </div>
       </div>
 
@@ -485,27 +501,21 @@
       <h2 class="display">A new product, introduced with zero body copy</h2>
       <p class="exhibit-subject">"Nunchuk Launch Email #1" — first announcement to the full list</p>
 
-      <div class="exhibit-bars">
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-row-label">Unique clicks</span>
-            <span class="bar-row-value">446<span class="lift">top-3 click volume of the year</span></span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" style="width:62%"></div></div>
+      <div class="exhibit-stats">
+        <div class="exhibit-stat">
+          <div class="exhibit-stat-label">Unique Clicks</div>
+          <div class="exhibit-stat-num">446</div>
+          <div class="exhibit-stat-sub">top-3 click volume of the year</div>
         </div>
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-row-label">Click rate</span>
-            <span class="bar-row-value">2.10%<span class="lift">7x account average</span></span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" style="width:70%"></div><div class="bar-baseline-marker" style="left:10%"></div></div>
+        <div class="exhibit-stat">
+          <div class="exhibit-stat-label">Click rate</div>
+          <div class="exhibit-stat-num">2.10%</div>
+          <div class="exhibit-stat-sub">7x account average</div>
         </div>
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-row-label">Recipients reached</span>
-            <span class="bar-row-value">21,305<span class="lift">full Newsletter + D2C list</span></span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+        <div class="exhibit-stat">
+          <div class="exhibit-stat-label">Recipients reached</div>
+          <div class="exhibit-stat-num">21,305</div>
+          <div class="exhibit-stat-sub">full Newsletter + D2C list</div>
         </div>
       </div>
 
@@ -525,27 +535,21 @@
       <h2 class="display">A seasonal hook that earned its place on a sales calendar</h2>
       <p class="exhibit-subject">"Halloween Trick or Treat" — Variation A, winning subject line</p>
 
-      <div class="exhibit-bars">
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-row-label">Revenue</span>
-            <span class="bar-row-value">$1,030<span class="lift">on a non-discount-led concept</span></span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" style="width:19%"></div></div>
+      <div class="exhibit-stats">
+        <div class="exhibit-stat">
+          <div class="exhibit-stat-label">Revenue</div>
+          <div class="exhibit-stat-num">$1,030</div>
+          <div class="exhibit-stat-sub">on a non-discount-led concept</div>
         </div>
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-row-label">Open rate</span>
-            <span class="bar-row-value">42.8%<span class="lift">won A/B test outright</span></span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" style="width:43%"></div><div class="bar-baseline-marker" style="left:46%"></div></div>
+        <div class="exhibit-stat">
+          <div class="exhibit-stat-label">Open rate</div>
+          <div class="exhibit-stat-num">42.8%</div>
+          <div class="exhibit-stat-sub">won A/B test outright</div>
         </div>
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-row-label">Average order value</span>
-            <span class="bar-row-value">$102.98<span class="lift">above program average</span></span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" style="width:55%"></div></div>
+        <div class="exhibit-stat">
+          <div class="exhibit-stat-label">Average order value</div>
+          <div class="exhibit-stat-num">$102.98</div>
+          <div class="exhibit-stat-sub">above program average</div>
         </div>
       </div>
 
