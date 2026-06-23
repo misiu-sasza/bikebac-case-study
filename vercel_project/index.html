@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matt Kretzschmar — Marketing Portfolio</title>
+<style>
+  @font-face {
+    font-family: "ITC Avant Garde";
+    src: url("fonts/ITCAvantGardeStd-Bk.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "ITC Avant Garde";
+    src: url("fonts/ITCAvantGardeStd-Md.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "ITC Avant Garde";
+    src: url("fonts/ITCAvantGardeStd-Demi.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "ITC Avant Garde";
+    src: url("fonts/ITCAvantGardeStd-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --background: #0a0a0a;
+    --surface: #111111;
+    --border: #1e1e1e;
+    --foreground: #f0f0f0;
+    --muted: #6b6b6b;
+    --accent: #d4a843;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: "ITC Avant Garde", -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .display {
+    font-family: "ITC Avant Garde", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  .title-demi {
+    font-family: "ITC Avant Garde", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+  }
+
+  /* ===== NAV ===== */
+  .sitenav {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 32px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sitenav-brand {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--foreground);
+    font-family: "ITC Avant Garde", sans-serif;
+  }
+
+  .sitenav-links {
+    display: flex;
+    gap: 28px;
+  }
+
+  .sitenav-links a {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+    font-family: "ITC Avant Garde", sans-serif;
+  }
+
+  .sitenav-links a:hover,
+  .sitenav-links a.active {
+    color: var(--accent);
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 96px 32px 72px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: "ITC Avant Garde", sans-serif;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 0.98;
+    margin-bottom: 28px;
+    max-width: 800px;
+  }
+
+  .hero h1 .accent-word {
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 560px;
+  }
+
+  /* ===== CASE STUDIES ===== */
+  .studies {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 32px 120px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .study-card {
+    display: block;
+    text-decoration: none;
+    color: var(--foreground);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .study-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .study-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-family: "ITC Avant Garde", sans-serif;
+  }
+
+  .study-title {
+    font-size: 26px;
+    line-height: 1.1;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+
+  .study-desc {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .study-stats {
+    display: flex;
+    gap: 28px;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .study-stat-num {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--foreground);
+    margin-bottom: 4px;
+  }
+
+  .study-stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .study-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 24px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-family: "ITC Avant Garde", sans-serif;
+  }
+
+  @media (max-width: 760px) {
+    .hero { padding: 56px 20px 48px; }
+    .studies { grid-template-columns: 1fr; padding: 48px 20px 80px; gap: 16px; }
+    .study-card { padding: 28px; }
+  }
+</style>
+</head>
+<body>
+
+  <nav class="sitenav">
+    <div class="sitenav-brand">Matt Kretzschmar</div>
+    <div class="sitenav-links">
+      <a class="active" href="/">Home</a>
+      <a href="/bikebac/">Bikebac</a>
+      <a href="/traeger/">Traeger</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Marketing &amp; Direct Response</div>
+    <h1 class="display">Case studies in <span class="accent-word">growth</span></h1>
+    <p class="hero-sub">A look at email programs, social content, and the numbers behind them — pulled directly from Klaviyo and Sprinklr, not dressed up after the fact.</p>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section class="studies">
+
+    <a class="study-card" href="/bikebac/">
+      <div class="study-eyebrow">Email Marketing &middot; Klaviyo</div>
+      <div class="study-title title-demi">Bikebac</div>
+      <div class="study-desc">Five email sends that beat the account average — popups, flows, and plain-text copy that outperformed fully designed campaigns.</div>
+      <div class="study-stats">
+        <div>
+          <div class="study-stat-num">$8,917</div>
+          <div class="study-stat-label">Top single email</div>
+        </div>
+        <div>
+          <div class="study-stat-num">+140%</div>
+          <div class="study-stat-label">List growth</div>
+        </div>
+      </div>
+      <div class="study-arrow">View case study &rarr;</div>
+    </a>
+
+    <a class="study-card" href="/traeger/">
+      <div class="study-eyebrow">Social Video &middot; TikTok / Instagram</div>
+      <div class="study-title title-demi">Traeger Grills</div>
+      <div class="study-desc">Launched Traeger's TikTok channel from zero to 210K followers, with a look at the top-performing Instagram videos behind the growth.</div>
+      <div class="study-stats">
+        <div>
+          <div class="study-stat-num">210K</div>
+          <div class="study-stat-label">TikTok followers</div>
+        </div>
+        <div>
+          <div class="study-stat-num">153.3M</div>
+          <div class="study-stat-label">Instagram impressions</div>
+        </div>
+      </div>
+      <div class="study-arrow">View case study &rarr;</div>
+    </a>
+
+  </section>
+
+</body>
+</html>
